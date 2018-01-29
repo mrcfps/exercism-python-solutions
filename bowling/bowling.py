@@ -12,13 +12,13 @@ class Frame(object):
         return sum(self.throws)
 
     def is_strike(self):
-        return self.throws and self.throws[0] == 10
+        return self.total_pins == 10 and len(self.throws) == 1
 
     def is_spare(self):
-        return self.throws and self.throws[0] < 10 and self.total_pins == 10
+        return self.total_pins == 10 and len(self.throws) == 2
 
     def is_open(self):
-        return len(self.throws) == 2 and self.total_pins < 10
+        return self.total_pins < 10 and len(self.throws) == 2
 
     def is_closed(self):
         """Return whether a frame is over."""
