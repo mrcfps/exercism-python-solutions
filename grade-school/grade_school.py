@@ -1,16 +1,15 @@
 class School(object):
     def __init__(self, name):
         self.name = name
-        self.grades = [list() for _ in range(9)]
+        self.grades = [set() for _ in range(8)]
 
     def add(self, name, grade):
         """Add a student's name to the roster for a grade."""
-        self.grades[grade-1].append(name)
+        self.grades[grade-1].add(name)
 
     def grade(self, grade):
         """Get a list of all students enrolled in a grade."""
-        res_grade = self.grades[grade-1]
-        return tuple(res_grade) if res_grade else set()
+        return self.grades[grade-1]
 
     def sort(self):
         """
