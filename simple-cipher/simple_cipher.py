@@ -37,37 +37,16 @@ class Cipher(object):
         return ''.join(
             self._convert(char, self.key[idx % len(self.key)])
             for idx, char in enumerate(text)
-            if char in ascii_lowercase
-        )
+            if char in ascii_lowercase)
 
     def decode(self, text):
         return ''.join(
             self._convert(char, self.key[idx % len(self.key)], encode=False)
             for idx, char in enumerate(text)
-            if char in ascii_lowercase
-        )
+            if char in ascii_lowercase)
 
 
-class Caesar(object):
+class Caesar(Cipher):
 
-    def _convert(self, char, encode=True):
-        char_idx = ascii_lowercase.index(char)
-        if encode:
-            converted = ascii_lowercase[(char_idx+3) % 26]
-        else:
-            converted = ascii_lowercase[(char_idx-3) % 26]
-        return converted
-
-    def encode(self, text):
-        return ''.join(
-            self._convert(char.lower())
-            for char in text
-            if char.lower() in ascii_lowercase
-        )
-
-    def decode(self, text):
-        return ''.join(
-            self._convert(char.lower(), encode=False)
-            for char in text
-            if char.lower() in ascii_lowercase
-        )
+    def __init__(self):
+        Cipher.__init__(self, "dddd")
