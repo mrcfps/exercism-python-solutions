@@ -11,24 +11,21 @@ class BufferEmptyException(Exception):
 
 class CircularBuffer(object):
     def __init__(self, capacity):
-        self.capacity = capacity
-        self.buffer = deque()
+        self._buffer = deque(maxlen=capacity)
 
     def clear(self):
-        self.buffer.clear()
+        self._buffer.clear()
 
     def read(self):
         try:
-            return self.buffer.popleft()
+            return self._buffer.popleft()
         except IndexError:
             raise BufferEmptyException("buffer is empty")
 
     def write(self, data):
-        if len(self.buffer) == self.capacity:
+        if len(self._buffer) == self._buffer.maxlen:
             raise BufferFullException("buffer is full")
-        self.buffer.append(data)
+        self._buffer.append(data)
 
     def overwrite(self, data):
-        if len(self.buffer) == self.capacity:
-            self.read()
-        self.buffer.append(data)
+        self._buffer.append(data)
