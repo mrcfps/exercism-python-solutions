@@ -7,13 +7,11 @@ def rec(length):
     Input the length of the original text, return the number of rows
     and columns of the rectangle.
     """
-    base = math.floor(math.sqrt(length))
-    if base * base == length:
-        r, c = base, base
-    elif base * base < length <= base * (base+1):
-        r, c = base, base+1
+    if length == 0:
+        r, c = 0, 0
     else:
-        r, c = base+1, base+1
+        r = round(math.sqrt(length))
+        c = round(length / r)
     return r, c
 
 
